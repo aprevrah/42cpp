@@ -2,7 +2,7 @@ CFLAGS = -Wall -Werror -Wextra
 CC = g++
 
 NAME = phonebook 
-SRC = phonebook.cpp
+SRC = PhoneBook.cpp Contact.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
