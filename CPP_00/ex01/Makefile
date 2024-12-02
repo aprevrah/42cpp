@@ -1,5 +1,5 @@
-CFLAGS = -Wall -Werror -Wextra
-CC = g++
+CFLAGS = -Wall -Werror -Wextra -std=c++98
+CC = c++
 
 NAME = phonebook 
 SRC = PhoneBook.cpp Contact.cpp main.cpp
