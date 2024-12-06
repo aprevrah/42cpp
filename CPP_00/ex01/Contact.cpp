@@ -29,11 +29,11 @@ void	Contact::displaySummary(int index) const
 
 void	Contact::displayDetails(void) const
 {
-	std::cout << "First Name: " << firstName << std::endl;
-	std::cout << "Last Name: " << lastName << std::endl;
-	std::cout << "Nickname: " << nickname << std::endl;
-	std::cout << "Phone Number: " << phoneNumber << std::endl;
-	std::cout << "Darkest Secret: " << darkestSecret << std::endl;
+	std::cout << "👤 First Name: " << firstName << std::endl;
+	std::cout << "🖊️  Last Name: " << lastName << std::endl;
+	std::cout << "🗣️  Nickname: " << nickname << std::endl;
+	std::cout << "📞 Phone Number: " << phoneNumber << std::endl;
+	std::cout << "🤫 Darkest Secret: " << darkestSecret << std::endl;
 }
 
 std::string Contact::truncateField(const std::string &field)

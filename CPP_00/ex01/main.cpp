@@ -1,5 +1,6 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
+#include <limits>
 
 int main() {
     PhoneBook phoneBook;
@@ -8,13 +9,19 @@ int main() {
     while (true) {
         std::cout << "Enter command (ADD, SEARCH, EXIT): ";
         if (!std::getline(std::cin, command)) {
-			std::cout << "\nEOF -> Exiting..." << std::endl;
+			std::cout << std::endl;
             break;
 		}
         if (command == "ADD") {
-            phoneBook.addContact();
+            if (phoneBook.addContact()) {
+                std::cout << std::endl;
+                return 0;
+            }
         } else if (command == "SEARCH") {
-            phoneBook.searchContact();
+            if (phoneBook.searchContact()) {
+                std::cout << std::endl;
+                return 0;
+            }
         } else if (command == "EXIT") {
             break;
         } else {

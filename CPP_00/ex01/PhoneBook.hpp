@@ -13,7 +13,8 @@ private:
 public:
     PhoneBook();
 
-    void addContact();
+    int addContact();
 
-    void searchContact() const;
+    int searchContact() const;
+    static bool isValidPhoneNumber(const std::string& phoneNumber);
 };
