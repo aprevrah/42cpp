@@ -4,32 +4,37 @@
 
 bool makeDotReplace(const std::string& filename, const std::string& findStr, const std::string& replaceStr) {
     if (findStr.empty()) {
-        std::cerr << "Error: need a string to find" << std::endl;
+        std::cerr << "Error: string to look for is empty" << std::endl;
+        return false;
     }
+
     std::ifstream inputFile(filename.c_str());
     if (!inputFile.is_open()) {
         std::cerr << "Error: Could not open input file " << filename << std::endl;
         return false;
     }
+ 
+    std::string fileContent;
+    std::getline(inputFile, fileContent, '\0');
+    inputFile.close();
+
+    std::string::size_type pos = 0;
+    while ((pos = fileContent.find(findStr, pos)) != std::string::npos) {
+        fileContent.erase(pos, findStr.length());
+        fileContent.insert(pos, replaceStr);
+        pos += replaceStr.length();
+    }
+
     std::string outputFilename = filename + ".replace";
     std::ofstream outputFile(outputFilename.c_str());
     if (!outputFile.is_open()) {
-        inputFile.close();
         std::cerr << "Error: Could not create output file " << outputFilename << std::endl;
         return false;
     }
-    std::string line;
-    while (std::getline(inputFile, line)) {
-        std::string::size_type pos = 0;
-        while ((pos = line.find(findStr, pos)) != std::string::npos) {
-            line.erase(pos, findStr.length()); // replace(pos, findStr.length(), replaceStr);
-            line.insert(pos, replaceStr);
-            pos += replaceStr.length();
-        }
-        outputFile << line << '\n';
-    }
-    inputFile.close();
+    
+    outputFile << fileContent;
     outputFile.close();
+
     return true;
 }
 

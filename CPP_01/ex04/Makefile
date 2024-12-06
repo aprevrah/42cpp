@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 CC = c++
 
-NAME = test
+NAME = replace
 SRC = main.cpp
 OBJ = $(SRC:.cpp=.o)
 
