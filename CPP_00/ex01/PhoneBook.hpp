@@ -17,4 +17,5 @@ public:
 
     int searchContact() const;
     static bool isValidPhoneNumber(const std::string& phoneNumber);
+    static int  getString(const std::string& prompt, std::string& str);
 };

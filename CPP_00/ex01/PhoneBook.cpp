@@ -23,24 +23,40 @@ bool PhoneBook::isValidPhoneNumber(const std::string& phoneNumber)
     return true;
 }
 
+int PhoneBook::getString(const std::string& prompt, std::string& str)
+{
+    bool isValid = false;
+    while (!isValid)
+    {
+        isValid = true;
+        std::cout << prompt;
+        if (!std::getline(std::cin, str))
+            return 1;
+        for (size_t i = 0; i < str.size(); ++i) {
+        if (!(std::isalnum(str[i])))
+            isValid = false;
+        }
+        if (!isValid)
+            std::cout << "Invalid, try again..." << std::endl;
+    }
+    return 0;
+}
+
 int PhoneBook::addContact() {
     std::string firstName, lastName, nickname, phoneNumber, darkestSecret;
 
-    std::cout << "Enter First Name: ";
-    if (!std::getline(std::cin, firstName))
+    if (getString("Enter First Name: ", firstName))
         return 1;
-    std::cout << "Enter Last Name: ";
-    if (!std::getline(std::cin, lastName))
+    if (getString("Enter Last Name: ", lastName))
         return 1;
-    std::cout << "Enter Nickname: ";
-    if (!std::getline(std::cin, nickname))
+    if (getString("Enter Nickname: ", nickname))
         return 1;
     bool isValid = false;
     while (!isValid)
     {
         std::cout << "Enter Phone Number: ";
         if (!std::getline(std::cin, phoneNumber))
-            break;
+            return 1;
         if (!(isValid = isValidPhoneNumber(phoneNumber)))
             std::cout << "Invalid phone number try again..." << std::endl;
     }
@@ -56,6 +72,8 @@ int PhoneBook::addContact() {
     int index = contactCount % MAX_CONTACTS;
     contacts[index].setContact(firstName, lastName, nickname, phoneNumber, darkestSecret);
     contactCount++;
+    if (contactCount >= MAX_CONTACTS * 2)
+        contactCount = MAX_CONTACTS;
 
     std::cout << "Contact added successfully!" << std::endl;
     return 0;
@@ -82,11 +100,13 @@ int PhoneBook::searchContact() const {
         if (index == -1)
             std::cout << "Enter the index of the contact to display: ";
         else 
-            std::cout << "Invalid, try a number between 0 and " << contactCount - 1 << ": ";
+            std::cout << "Invalid, try again: ";
 
-        if (!(std::cin >> index))
+        if (!(std::cin >> index)) {
+            if (std::cin.eof())
+                return 1;
             index = -2;
-
+        }
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
