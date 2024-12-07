@@ -1,3 +1,14 @@
 .vscode
 *.o
 test*
+
+.gitignore
+ig.sh
+
+harl
+megaphone
+phonebook
+replace
+runtests
+test
+
