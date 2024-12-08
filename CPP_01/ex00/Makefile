@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 CC = c++
 
-NAME = test
+NAME = ex00.out
 SRC = Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
