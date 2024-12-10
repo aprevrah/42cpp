@@ -1,4 +1,4 @@
-CXXFLAGS := -Wall -Werror -Wextra -std=C++98
+CXXFLAGS := -Wall -Werror -Wextra -std=c++98
 CXX := c++
 
 NAME := clapclap
