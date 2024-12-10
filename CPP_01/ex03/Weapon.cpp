@@ -8,5 +8,5 @@ std::string Weapon::getType() {
 }
 
 void Weapon::setType(std::string type) {
-    type = type;
+    this->type = type;
 }
