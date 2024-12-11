@@ -164,14 +164,3 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed) {
 	os << fixed.toFloat();
     return os;
 }
-
-/*
-> ./a.out
-0
-0.00390625
-0.00390625
-0.00390625
-0.0078125
-10.1016
-10.1016
-*/
