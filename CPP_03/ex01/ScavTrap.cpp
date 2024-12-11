@@ -2,9 +2,15 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap(const std::string& name) 
-    : name(name), hitPoints(10), energyPoints(10), attackDamage(0) {
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
     std::cout << "ScavTrap " << name << " was constructed." << std::endl;
+    hitPoints = 10;
+    energyPoints = 10; 
+    attackDamage = 0;
+}
+
+ScavTrap::ScavTrap() {
+    std::cout << "ScavTrap " << name << " was destructed." << std::endl;
 }
 
 ScavTrap::~ScavTrap() {

@@ -3,13 +3,29 @@
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap() {}
+
 ClapTrap::ClapTrap(const std::string& name) 
     : name(name), hitPoints(10), energyPoints(10), attackDamage(0) {
     std::cout << "ClapTrap " << name << " was constructed." << std::endl;
 }
 
+ClapTrap::ClapTrap(const ClapTrap& other) : name(other.name), 
+    hitPoints(other.hitPoints), energyPoints(other.energyPoints), attackDamage(other.attackDamage) {}
+
 ClapTrap::~ClapTrap() {
     std::cout << "ClapTrap " << name << " was destructed." << std::endl;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap &rhs) {
+    std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &rhs) {
+		this->name = rhs.name;
+        this->hitPoints = rhs.hitPoints;
+        this->energyPoints = rhs.energyPoints;
+        this->attackDamage = rhs.attackDamage;
+	}
+	return *this;
 }
 
 void ClapTrap::attack(const std::string& target) {
