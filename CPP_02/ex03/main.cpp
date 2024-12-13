@@ -6,12 +6,14 @@ bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 int main( void ) {
 	const Point a(0, 0);
-	const Point b(4.5f, 6.5f);
+	const Point b(4, 6);
 	const Point c(5, 0);
 
 	const Point points[] = {
 		Point(1, 1),
 		Point(5, 4.5f),
+        Point(3, 0.01f),
+        Point(3, 0.0f),
 		Point(4.5f, 2.25f)
 	};
 
@@ -20,7 +22,7 @@ int main( void ) {
               << "b" << b << ", "
               << "c" << c << RESET << std::endl;
 
-    for (int i = 0; i < 3; ++i) {
+    for (unsigned long i = 0; i < sizeof(points) / sizeof(Point); ++i) {
         std::cout << std::endl << "Point " << i + 1 << ": "
                   << BLUE << points[i] << RESET << std::endl;
 

@@ -4,27 +4,19 @@
 
 // constructors
 
-Fixed::Fixed() : value(0) {
-	//std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed() : value(0) {}
 
-Fixed::Fixed(const Fixed& fixed) : value(fixed.value) {
-	//std::cout << "Copy constructor called" << std::endl;
-}
+Fixed::Fixed(const Fixed& fixed) : value(fixed.value) {}
 
 Fixed::Fixed(const int n) {
-	//std::cout << "Int constructor called" << std::endl;
 	value = n << fbits;
 }
 
 Fixed::Fixed(const float f) {
-	//std::cout << "Float constructor called" << std::endl;
 	 value = static_cast<int>(roundf(f * (1 << fbits)));
 }
 
-Fixed::~Fixed() {
-	//std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed() {}
 
 // operator overloads
 
@@ -47,11 +39,11 @@ bool Fixed::operator<(const Fixed& rhs) const {
 }
 
 bool Fixed::operator>=(const Fixed& rhs) const {
-	return value < rhs.value;
+	return value >= rhs.value;
 }
 
 bool Fixed::operator<=(const Fixed& rhs) const {
-	return value > rhs.value;
+	return value <= rhs.value;
 }
 
 bool Fixed::operator==(const Fixed& rhs) const {
@@ -164,14 +156,3 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed) {
 	os << fixed.toFloat();
     return os;
 }
-
-/*
-> ./a.out
-0
-0.00390625
-0.00390625
-0.00390625
-0.0078125
-10.1016
-10.1016
-*/
