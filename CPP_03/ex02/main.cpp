@@ -1,5 +1,6 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 int main() {
@@ -18,5 +19,11 @@ int main() {
         ScavTrap scavy("Scavy");
         scavy.attack("scavy's-target");
         scavy.guardGate();
+    }
+    {
+        std::cout << "--------------------------------------------------------" << std::endl;
+        FragTrap fragy("Fragy");
+        fragy.attack("fragy's-target");
+        fragy.highFivesGuys();
     }
 }

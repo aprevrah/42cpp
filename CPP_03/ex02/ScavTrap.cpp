@@ -47,33 +47,3 @@ void ScavTrap::attack(const std::string& target) {
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap is now in Gate keeper mode." << std::endl;
 }
-
-/* 
-void ScavTrap::takeDamage(unsigned int amount) {
-    if (hitPoints == 0) {
-        std::cout << "ScavTrap " << name << " is already dead!" << std::endl;
-        return;
-    }
-    if (amount > hitPoints) {
-        amount = hitPoints;
-    }
-    hitPoints -= amount;
-    std::cout << "ScavTrap " << name << " took " << amount << " point" 
-              << (amount != 1 ? "s" : "") << " of damage! Remaining hit points: " << hitPoints << "." << std::endl;
-}
-
-void ScavTrap::beRepaired(unsigned int amount) {
-    if (hitPoints == 0) {
-        std::cout << "ScavTrap " << name << " is dead and cannot be repaired!" << std::endl;
-        return;
-    }
-    if (energyPoints == 0) {
-        std::cout << "ScavTrap " << name << " tries to repair itself but lacks the energy to do so!" << std::endl;
-        return;
-    }
-    energyPoints--;
-    hitPoints += amount;
-    std::cout << "ScavTrap " << name << " repaired itself, restoring " << amount << " hit point" 
-              << (amount != 1 ? "s" : "") << "! New hit points: " << hitPoints << "." << std::endl;
-
-} */
