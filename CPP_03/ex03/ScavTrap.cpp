@@ -1,6 +1,7 @@
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 #include <iostream>
+#include <typeinfo>
 
 ScavTrap::ScavTrap() : ClapTrap() {
     std::cout << "ScavTrap default constructor called." << std::endl;
@@ -46,4 +47,14 @@ void ScavTrap::attack(const std::string& target) {
 
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap is now in Gate keeper mode." << std::endl;
+}
+
+void ScavTrap::stats() {
+    std::cout << "+==========================+" << std::endl;
+    std::cout << "Class:        " << typeid(*this).name() << std::endl;
+    std::cout << "name:         " << name << std::endl;
+    std::cout << "hitPoints:    " << hitPoints << std::endl;
+    std::cout << "energyPoints: " << energyPoints << std::endl;
+    std::cout << "attackDamage: " << attackDamage << std::endl;
+    std::cout << "+==========================+" << std::endl;
 }

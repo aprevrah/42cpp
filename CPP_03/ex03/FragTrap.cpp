@@ -1,6 +1,8 @@
 #include "FragTrap.hpp"
 #include "ClapTrap.hpp"
 #include <iostream>
+#include <typeinfo>
+
 
 FragTrap::FragTrap() : ClapTrap() {
     std::cout << "FragTrap default constructor called." << std::endl;
@@ -46,4 +48,15 @@ void FragTrap::attack(const std::string& target) {
 
 void FragTrap::highFivesGuys(void) {
     std::cout << "Hey High Five Guys!" << std::endl;
+}
+
+
+void FragTrap::stats() {
+    std::cout << "+==========================+" << std::endl;
+    std::cout << "Class:        " << typeid(*this).name() << std::endl;
+    std::cout << "name:         " << name << std::endl;
+    std::cout << "hitPoints:    " << hitPoints << std::endl;
+    std::cout << "energyPoints: " << energyPoints << std::endl;
+    std::cout << "attackDamage: " << attackDamage << std::endl;
+    std::cout << "+==========================+" << std::endl;
 }

@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
 
 int main() {
@@ -25,5 +26,12 @@ int main() {
         FragTrap fragy("Fragy");
         fragy.attack("fragy's-target");
         fragy.highFivesGuys();
+    }
+    {
+        std::cout << "--------------------------------------------------------" << std::endl;
+        DiamondTrap dia("dia");
+        dia.whoAmI();
+        dia.stats();
+        dia.ScavTrap::attack("hello");
     }
 }

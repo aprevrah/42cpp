@@ -2,7 +2,7 @@
 #include <string>
 #include "ClapTrap.hpp"
 
-class FragTrap : virtual ClapTrap {
+class FragTrap : virtual public ClapTrap {
 	protected:
 		FragTrap();
 	public:
@@ -13,4 +13,5 @@ class FragTrap : virtual ClapTrap {
 
 		void attack(const std::string& target);
 		void highFivesGuys(void);
+		void stats();
 };

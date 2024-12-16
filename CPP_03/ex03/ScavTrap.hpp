@@ -2,7 +2,7 @@
 #include <string>
 #include "ClapTrap.hpp"
 
-class ScavTrap : virtual ClapTrap {
+class ScavTrap : virtual public ClapTrap {
 	protected:
 		ScavTrap();
 	public:
@@ -13,4 +13,5 @@ class ScavTrap : virtual ClapTrap {
 
 		void attack(const std::string& target);
 		void guardGate();
+		void stats();
 };
