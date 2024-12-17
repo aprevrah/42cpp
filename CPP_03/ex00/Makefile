@@ -1,7 +1,7 @@
 CXXFLAGS := -Wall -Werror -Wextra -std=c++98
 CXX := c++
 
-NAME := clapclap
+NAME := clap.out
 SRC := ClapTrap.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 

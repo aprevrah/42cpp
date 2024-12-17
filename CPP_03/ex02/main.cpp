@@ -6,24 +6,20 @@
 int main() {
     {
         ClapTrap clappy("Clappy");
-        clappy.attack("Target");
-        clappy.takeDamage(1);
-        clappy.takeDamage(20);
-        clappy.beRepaired(20);
-        for (int i = 0; i < 2; i++) {
-            clappy.beRepaired(1);
-        }
+        clappy.stats();
     }
     {
         std::cout << "--------------------------------------------------------" << std::endl;
         ScavTrap scavy("Scavy");
-        scavy.attack("scavy's-target");
+        scavy.stats();
+        scavy.attack("Scavy's Target");
         scavy.guardGate();
     }
     {
         std::cout << "--------------------------------------------------------" << std::endl;
         FragTrap fragy("Fragy");
-        fragy.attack("fragy's-target");
+        fragy.stats();
+        fragy.attack("Fragy's Target");
         fragy.highFivesGuys();
     }
 }

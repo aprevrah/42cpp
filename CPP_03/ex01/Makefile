@@ -1,7 +1,7 @@
 CXXFLAGS := -Wall -Werror -Wextra -std=c++98
 CXX := c++
 
-NAME := sev
+NAME := scav.out
 SRC := ClapTrap.cpp ScavTrap.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 

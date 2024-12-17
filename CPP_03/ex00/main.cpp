@@ -2,11 +2,12 @@
 
 int main() {
     ClapTrap clappy("Clappy");
-    clappy.attack("Target");
-    clappy.takeDamage(1);
+    clappy.stats();
+    clappy.attack("Clappy's Target");
+    clappy.takeDamage(8);
+    clappy.beRepaired(5);
+    clappy.stats();
     clappy.takeDamage(20);
     clappy.beRepaired(20);
-    for (int i = 0; i < 10; i++) {
-        clappy.beRepaired(1);
-    }
+    clappy.stats();
 }

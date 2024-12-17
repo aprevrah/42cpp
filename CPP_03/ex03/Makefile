@@ -1,7 +1,7 @@
 CXXFLAGS := -Wall -Werror -Wextra -std=c++98
 CXX := c++
 
-NAME := sev
+NAME := diamond.out
 SRC := ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
