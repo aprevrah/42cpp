@@ -7,7 +7,7 @@ Animal::Animal(const std::string& type) : type(type) {
     std::cout << typeid(*this).name() << " : Constructor called" << std::endl;
 }
 
-Animal::Animal() {
+Animal::Animal() : type("Animal") {
     std::cout << typeid(*this).name() << " : Default-Constructor called" << std::endl;
 }
 
@@ -21,6 +21,7 @@ Animal::~Animal() {
 }
 
 Animal& Animal::operator=(const Animal& rhs) {
+    std::cout << typeid(*this).name() << " : Copy assignment operator called" << std::endl;
     if (this != &rhs) {
         this->type = rhs.type;
     }
@@ -32,5 +33,5 @@ void Animal::makeSound() const {
 }
 
 std::string Animal::getType() const {
-    return this->type;
+    return type;
 }

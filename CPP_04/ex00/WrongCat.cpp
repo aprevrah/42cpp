@@ -1,26 +1,26 @@
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 #include <string>
 #include <iostream>
 #include <typeinfo>
 
-Dog::Dog(const std::string& type) : type(type) {
+WrongCat::WrongCat(const std::string& type) : type(type) {
     std::cout << typeid(*this).name() << " : Constructor called" << std::endl;
 }
 
-Dog::Dog() : type("Dog") {
+WrongCat::WrongCat() : type("WrongCat") {
     std::cout << typeid(*this).name() << " : Default-Constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& other) : type(other.type) {
+WrongCat::WrongCat(const WrongCat& other) : type(other.type) {
     std::cout << typeid(*this).name() << " : Copy-Constructor called" << std::endl;
 }
 
-Dog::~Dog() {
+WrongCat::~WrongCat() {
     std::cout << typeid(*this).name() << " : Deconstructor called" << std::endl;
 
 }
 
-Dog& Dog::operator=(const Dog& rhs) {
+WrongCat& WrongCat::operator=(const WrongCat& rhs) {
     std::cout << typeid(*this).name() << " : Copy assignment operator called" << std::endl;
     if (this != &rhs) {
         this->type = rhs.type;
@@ -28,6 +28,6 @@ Dog& Dog::operator=(const Dog& rhs) {
     return *this;
 }
 
-void Dog::makeSound() const {
-    std::cout << "Wooof" << std::endl;
+void WrongCat::makeSound() const {
+    std::cout << "Meow" << std::endl;
 }
