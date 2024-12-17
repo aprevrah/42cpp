@@ -73,3 +73,12 @@ void ClapTrap::beRepaired(unsigned int amount) {
     std::cout << "ClapTrap " << name << " repaired itself, restoring " << amount << " hit point" 
               << (amount != 1 ? "s" : "") << "! New hit points: " << hitPoints << "." << std::endl;
 }
+
+void ClapTrap::stats() {
+    std::cout << "+==========================+" << std::endl;
+    std::cout << "name:         " << name << std::endl;
+    std::cout << "hitPoints:    " << hitPoints << std::endl;
+    std::cout << "energyPoints: " << energyPoints << std::endl;
+    std::cout << "attackDamage: " << attackDamage << std::endl;
+    std::cout << "+==========================+" << std::endl;
+}

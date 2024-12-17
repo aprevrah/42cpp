@@ -1,6 +1,5 @@
 #include "ClapTrap.hpp"
 #include <iostream>
-#include <typeinfo>
 
 
 #include "ClapTrap.hpp"
@@ -76,7 +75,6 @@ void ClapTrap::beRepaired(unsigned int amount) {
 
 void ClapTrap::stats() {
     std::cout << "+==========================+" << std::endl;
-    std::cout << "Class:        " << typeid(*this).name() << std::endl;
     std::cout << "name:         " << name << std::endl;
     std::cout << "hitPoints:    " << hitPoints << std::endl;
     std::cout << "energyPoints: " << energyPoints << std::endl;

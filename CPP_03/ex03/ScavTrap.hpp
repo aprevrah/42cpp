@@ -4,6 +4,9 @@
 
 class ScavTrap : virtual public ClapTrap {
 	protected:
+		static const unsigned int hitPoints_default = 100;
+		static const unsigned int energyPoints_default = 50;
+		static const unsigned int attackDamage_default = 20;
 		ScavTrap();
 	public:
 		ScavTrap(const std::string& name);
@@ -13,5 +16,4 @@ class ScavTrap : virtual public ClapTrap {
 
 		void attack(const std::string& target);
 		void guardGate();
-		void stats();
 };

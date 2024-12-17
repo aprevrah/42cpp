@@ -1,7 +1,7 @@
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 #include <iostream>
-#include <typeinfo>
+
 
 ScavTrap::ScavTrap() : ClapTrap() {
     std::cout << "ScavTrap default constructor called." << std::endl;
@@ -9,9 +9,9 @@ ScavTrap::ScavTrap() : ClapTrap() {
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
     std::cout << "ScavTrap " << name << " was constructed." << std::endl;
-    hitPoints = 100;
-    energyPoints = 50; 
-    attackDamage = 20;
+    hitPoints = hitPoints_default;
+    energyPoints = energyPoints_default; 
+    attackDamage = attackDamage_default;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) {
@@ -47,14 +47,4 @@ void ScavTrap::attack(const std::string& target) {
 
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap is now in Gate keeper mode." << std::endl;
-}
-
-void ScavTrap::stats() {
-    std::cout << "+==========================+" << std::endl;
-    std::cout << "Class:        " << typeid(*this).name() << std::endl;
-    std::cout << "name:         " << name << std::endl;
-    std::cout << "hitPoints:    " << hitPoints << std::endl;
-    std::cout << "energyPoints: " << energyPoints << std::endl;
-    std::cout << "attackDamage: " << attackDamage << std::endl;
-    std::cout << "+==========================+" << std::endl;
 }
