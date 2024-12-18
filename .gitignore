@@ -1,6 +1,7 @@
 .vscode
 *.o
 test*
+*.out
 
 .gitignore
 ig.sh

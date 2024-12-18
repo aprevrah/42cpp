@@ -10,6 +10,7 @@
 int main()
 {
 	{
+		std::cout << "Test in subject...\n" << std::endl;
 		const Animal* meta = new Animal();
 		const Animal* j = new Dog();
 		const Animal* i = new Cat();
@@ -20,7 +21,7 @@ int main()
 		meta->makeSound();
 	}
 	{
-		std::cout << "Test with WrongAnimal and WrongCat..." << std::endl;
+		std::cout << "\nTest with WrongAnimal and WrongCat...\n" << std::endl;
 		const Animal* meta = new Animal();
 		const Animal* j = new Dog();
 		const WrongAnimal* i = new WrongCat();

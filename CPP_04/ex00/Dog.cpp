@@ -1,27 +1,27 @@
 #include "Dog.hpp"
 #include <string>
 #include <iostream>
-#include <typeinfo>
+
 
 Dog::Dog(const std::string& type) : type(type) {
-    std::cout << typeid(*this).name() << " : Constructor called" << std::endl;
+    std::cout << "Dog" << " : Constructor called" << std::endl;
 }
 
 Dog::Dog() : type("Dog") {
-    std::cout << typeid(*this).name() << " : Default-Constructor called" << std::endl;
+    std::cout << "Dog" << " : Default-Constructor called" << std::endl;
 }
 
 Dog::Dog(const Dog& other) : type(other.type) {
-    std::cout << typeid(*this).name() << " : Copy-Constructor called" << std::endl;
+    std::cout << "Dog" << " : Copy-Constructor called" << std::endl;
 }
 
 Dog::~Dog() {
-    std::cout << typeid(*this).name() << " : Deconstructor called" << std::endl;
+    std::cout << "Dog" << " : Deconstructor called" << std::endl;
 
 }
 
 Dog& Dog::operator=(const Dog& rhs) {
-    std::cout << typeid(*this).name() << " : Copy assignment operator called" << std::endl;
+    std::cout << "Dog" << " : Copy assignment operator called" << std::endl;
     if (this != &rhs) {
         this->type = rhs.type;
     }

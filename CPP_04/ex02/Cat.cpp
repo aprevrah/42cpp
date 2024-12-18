@@ -1,24 +1,24 @@
 #include "Cat.hpp"
 #include <string>
 #include <iostream>
-#include <typeinfo>
+
 
 Cat::Cat(const std::string& type) : type(type) {
-    std::cout << typeid(*this).name() << " : Constructor called" << std::endl;
+    std::cout << "Cat" << " : Constructor called" << std::endl;
     brain = new Brain();
 }
 
 Cat::Cat() : Animal("Cat"), brain(new Brain()) {
-    std::cout  << typeid(*this).name() << " : Default Constructor called" << std::endl;
+    std::cout  << "Cat" << " : Default Constructor called" << std::endl;
 }
 
 Cat::Cat(const Cat& other) : Animal(other), brain(new Brain(*other.brain)) {
-    std::cout  << typeid(*this).name() << " : Copy Constructor called" << std::endl;
+    std::cout  << "Cat" << " : Copy Constructor called" << std::endl;
 }
 
 Cat::~Cat() {
     delete brain;
-    std::cout  << typeid(*this).name() << " : Destructor called" << std::endl;
+    std::cout  << "Cat" << " : Destructor called" << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& rhs) {

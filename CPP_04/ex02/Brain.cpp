@@ -1,28 +1,28 @@
 #include "Brain.hpp"
 #include <iostream>
-#include <typeinfo>
+
 
 
 Brain::Brain() {
-    std::cout << typeid(*this).name() << " : Default-Constructor called" << std::endl;
+    std::cout << "Brain" << " : Default-Constructor called" << std::endl;
     for (int i = 0; i < 100; ++i) {
         ideas[i] = "Unga Bunga";
     }
 }
 
 Brain::Brain(const Brain& other) {
-    std::cout << typeid(*this).name() << " : Copy-Constructor called" << std::endl;
+    std::cout << "Brain" << " : Copy-Constructor called" << std::endl;
     for (int i = 0; i < 100; ++i) {
         ideas[i] = other.ideas[i];
     }
 }
 
 Brain::~Brain() {
-    std::cout << typeid(*this).name() << " : Deconstructor called" << std::endl;
+    std::cout << "Brain" << " : Deconstructor called" << std::endl;
 }
 
 Brain& Brain::operator=(const Brain& rhs) {
-    std::cout << typeid(*this).name() << " : Copy assignment operator called" << std::endl;
+    std::cout << "Brain" << " : Copy assignment operator called" << std::endl;
     if (this != &rhs) {
         for (int i = 0; i < 100; ++i) {
             ideas[i] = rhs.ideas[i];
