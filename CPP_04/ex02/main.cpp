@@ -44,5 +44,8 @@ int main()
 	delete foo;
 	delete bar;
 	delete foofighter;
+
+	//This should no longer work.
+	//Animal animal_test();
 	return 0;
 }
