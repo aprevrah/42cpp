@@ -1,8 +1,8 @@
-CXXFLAGS := -Wall -Werror -Wextra -std=c++98
+CXXFLAGS := -Wall -Werror -Wextra -std=c++98 -g
 CXX := c++
 
-NAME := ex00.out
-SRC := Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+NAME := ex01.out
+SRC := Animal.cpp Cat.cpp Dog.cpp Brain.cpp main.cpp
 OBJ := $(SRC:.cpp=.o)
 
 all: $(NAME)

@@ -1,8 +1,11 @@
 #pragma once
 #include <string>
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal {
+    private:
+        Brain* brain;
     protected:
         std::string type;
     public:
