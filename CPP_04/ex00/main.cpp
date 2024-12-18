@@ -19,6 +19,9 @@ int main()
 		i->makeSound(); //will output the cat sound!
 		j->makeSound();
 		meta->makeSound();
+		delete meta;
+		delete j;
+		delete i;
 	}
 	{
 		std::cout << "\nTest with WrongAnimal and WrongCat...\n" << std::endl;
@@ -30,7 +33,9 @@ int main()
 		i->makeSound(); //will NOT output the cat sound!
 		j->makeSound();
 		meta->makeSound();
-		
+		delete meta;
+		delete j;
+		delete i;
 	}
 	return 0;
 }
