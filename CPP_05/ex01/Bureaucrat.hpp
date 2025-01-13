@@ -2,6 +2,9 @@
 #include <string>
 #include <iostream>
 #include <exception>
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -16,8 +19,11 @@ class Bureaucrat
 
         std::string const &getName() const;
         int getGrade() const;
+
         void incrementGrade();
         void decrementGrade();
+
+        void signForm(Form &form);
 
         class GradeTooLowException : public std::exception
         {
