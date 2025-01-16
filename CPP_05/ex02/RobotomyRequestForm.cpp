@@ -4,7 +4,7 @@
 
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
-    : AForm("RobotomyRequestForm", 72, 45), target_(target) {}
+    : AForm("Robotomy Request", 72, 45), target_(target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
     : AForm(other), target_(other.target_) {}
@@ -21,7 +21,8 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
     if (!getIsSigned()) {
-        throw AForm::GradeTooLowException();
+        std::cerr << getName() << " could not be executed because it has not been signed." << std::endl;
+        return;
     }
     if (executor.getGrade() > getGradeExecute()) {
         throw AForm::GradeTooLowException();

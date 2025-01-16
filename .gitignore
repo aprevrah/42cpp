@@ -1,6 +1,7 @@
 .vscode
 *.o
 test*
+Test*
 *.out
 
 .gitignore
