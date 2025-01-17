@@ -9,7 +9,7 @@ public:
     RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
     ~RobotomyRequestForm();
 
-    void execute(const Bureaucrat &executor) const;
+    void executeAction(const Bureaucrat &executor) const;
 
 private:
     std::string target_;

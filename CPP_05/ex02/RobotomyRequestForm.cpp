@@ -19,14 +19,8 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
-    if (!getIsSigned()) {
-        std::cerr << getName() << " could not be executed because it has not been signed." << std::endl;
-        return;
-    }
-    if (executor.getGrade() > getGradeExecute()) {
-        throw AForm::GradeTooLowException();
-    }
+void RobotomyRequestForm::executeAction(const Bureaucrat &executor) const {
+    (void) executor;
     srand(time(0));
     if (rand() % 2) {
         std::cout << target_ << " has been robotomized successfully" << std::endl;
