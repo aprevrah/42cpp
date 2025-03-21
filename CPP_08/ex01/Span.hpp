@@ -17,8 +17,8 @@ class Span {
 
         std::multiset<int> getMultiset();
         void addNumber(int number);
+        void addNumbers(std::set<int>::const_iterator begin, std::set<int>::const_iterator end);
         unsigned int shortestSpan() const;
         unsigned int longestSpan() const;
+        friend std::ostream &operator<<(std::ostream &os, Span const &span);
 };
-
-std::ostream &operator<<(std::ostream &out, Span &span);

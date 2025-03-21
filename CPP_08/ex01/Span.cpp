@@ -30,12 +30,20 @@ void Span::addNumber(int number) {
         throw std::runtime_error("Span is full");
 }
 
+void Span::addNumbers(std::set<int>::const_iterator begin, std::set<int>::const_iterator end) {
+    std::size_t count = static_cast<std::size_t>(std::distance(begin, end));
+    if (this->span_.size() + count > this->N_) {
+        throw std::runtime_error("Span is full");
+    }
+    this->span_.insert(begin, end);
+}
+
 unsigned int Span::shortestSpan() const {
     if (this->span_.size() < 2)
         throw std::runtime_error("Too little elements");
 
-    std::set<int>::const_iterator it = this->span_.begin();
-    std::set<int>::const_iterator nextIt = it;
+    std::multiset<int>::const_iterator it = this->span_.begin();
+    std::multiset<int>::const_iterator nextIt = it;
     ++nextIt;
 
     unsigned int minSpan = std::numeric_limits<unsigned int>::max();
@@ -58,9 +66,12 @@ unsigned int Span::longestSpan() const {
     return static_cast<unsigned int>(*this->span_.rbegin() - *this->span_.begin());
 }
 
-std::ostream &operator<<(std::ostream &out, Span &span) {
-    std::multiset<int> spanSet = span.getMultiset();
-    out << "Span Elements: "; 
-    std::copy(spanSet.begin(), spanSet.end(), std::ostream_iterator<int>(out, " "));
-    return out;
+std::ostream &operator<<(std::ostream &os, Span const &span) {
+    os << "{ ";
+    for (std::multiset<int>::const_iterator it = span.span_.begin(); 
+         it != span.span_.end(); ++it) {
+        os << *it << " ";
+    }
+    os << "}";
+    return os;
 }

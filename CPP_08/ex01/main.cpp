@@ -1,5 +1,7 @@
 #include "Span.hpp"
 #include <iostream>
+#include <algorithm>
+#include <set>
 #include <cstdlib>  // For rand()
 #include <ctime>    // For seeding random numbers
 
@@ -61,6 +63,28 @@ void testSpan() {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
 
+    std::cout << "\n===== addNumbers Tests =====" << std::endl;
+    std::set<int> numbers;
+    for (int i = 0; i < 10; ++i) {
+        numbers.insert(i);
+    }
+
+    try {
+        Span spAddRange(10);
+        spAddRange.addNumbers(numbers.begin(), numbers.end());
+        std::cout << spAddRange << std::endl;
+    } catch (const std::exception &e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+
+    try {
+        Span spAddFail(9);
+        spAddFail.addNumbers(numbers.begin(), numbers.end());
+        std::cout << spAddFail << std::endl;
+    } catch (const std::exception &e) {
+        std::cerr << "Expected exception: " << e.what() << std::endl;
+    }
+
     std::cout << "\n===== Copy and Assignment Test =====" << std::endl;
     try {
         Span sp1(5);
@@ -72,8 +96,8 @@ void testSpan() {
         Span sp3(3);
         sp3 = sp1; // Assignment operator test
 
-        std::cout << "Copy Constructor - Shortest Span: " << sp2.shortestSpan() << std::endl;
-        std::cout << "Assignment Operator - Longest Span: " << sp3.longestSpan() << std::endl;
+        std::cout << "Copy Constructor: " << sp2 << std::endl;
+        std::cout << "Assignment Operator: " << sp3 << std::endl;
     } catch (const std::exception &e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
