@@ -14,6 +14,7 @@ class Form
         int const gradeExecute_;
         bool isSigned_;
     public:
+        Form();
         Form(std::string const name, int gradeSign, int gradeExecute);
         Form(Form const &other);
         Form &operator=(Form const &rhs);

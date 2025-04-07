@@ -3,6 +3,8 @@
 #include <exception>
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat() : name_("Default Bureaucrat"), grade_(150) {}
+
 Bureaucrat::Bureaucrat(std::string const name, int grade) : name_(name) {
     if (grade < 1) {
         throw Bureaucrat::GradeTooHighException();

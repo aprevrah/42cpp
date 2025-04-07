@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 
+RobotomyRequestForm::RobotomyRequestForm()
+    : AForm("Robotomy Request", 72, 45), target_("Default Target") {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
     : AForm("Robotomy Request", 72, 45), target_(target) {}
@@ -21,6 +23,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::executeAction(const Bureaucrat &executor) const {
     (void) executor;
+    std::cout << "* drilling noises *" << std::endl;
     srand(time(0));
     if (rand() % 2) {
         std::cout << target_ << " has been robotomized successfully" << std::endl;

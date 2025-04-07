@@ -3,6 +3,8 @@
 #include <exception>
 #include "Form.hpp"
 
+Form::Form() : name_("Default Form"), gradeSign_(150), gradeExecute_(150), isSigned_(false) {}
+
 Form::Form(std::string const name, int gradeSign, int gradeExecute)
     : name_(name), gradeSign_(gradeSign), gradeExecute_(gradeExecute), isSigned_(false) {
     if (gradeSign < 1 || gradeExecute < 1) {

@@ -3,12 +3,19 @@
 
 int main() {
     {
+        //default constructor
+        Bureaucrat b_0;
+        std::cout << b_0 << std::endl;
+        //parameterized constructor
         Bureaucrat b_1("Bob", 20);
         std::cout << b_1 << std::endl;
+        //copy constructor
         Bureaucrat b_2(b_1);
         std::cout << b_2 << std::endl;
+        //parameterized constructor
         Bureaucrat b_3("Alice", 30);
         std::cout << b_3 << std::endl;
+        //copy assignment operator
         b_3 = b_1;
         std::cout << b_3 << std::endl;
     }

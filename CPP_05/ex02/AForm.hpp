@@ -14,6 +14,7 @@ class AForm
         int const gradeExecute_;
         bool isSigned_;
     public:
+        AForm();
         AForm(std::string const name, int gradeSign, int gradeExecute);
         AForm(AForm const &other);
         AForm &operator=(AForm const &rhs);

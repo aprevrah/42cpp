@@ -15,6 +15,8 @@ int main() {
         bob.signForm(boringForm);
         alice.signForm(otherBoringForm);
         std::cout << boringForm;
+        Form defaultForm;
+        std::cout << defaultForm;
     }
 
     return (0);

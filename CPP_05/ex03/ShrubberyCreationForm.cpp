@@ -1,6 +1,9 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
+ShrubberyCreationForm::ShrubberyCreationForm()
+    : AForm("Shrubbery Creation", 145, 137), target_("Default Target") {}
+
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
     : AForm("Shrubbery Creation", 145, 137), target_(target) {}
 
@@ -24,6 +27,16 @@ void ShrubberyCreationForm::executeAction(const Bureaucrat &executor) const {
     if (!outputFile.is_open()) {
         std::cerr << "Error: Could not create output file " << outputFilename << std::endl;
     }
-    outputFile << "Tree: <|> planted by " << executor.getName();
+    outputFile << 
+    "     _______\n"
+    "  __(      ~)__\n"
+    " (   ( )      ~)\n"
+    "(  (      )     )\n"
+    " \\  _-     -_  /\n"
+    "   ~  \\\\ //  ~\n"
+    "_- -   | | _- _\n"
+    "  _ -  | |   -_\n"
+    "      // \\\\\n"
+    "planted by " << executor.getName();
     outputFile.close();
 }
