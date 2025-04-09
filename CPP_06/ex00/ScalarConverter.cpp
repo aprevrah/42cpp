@@ -27,6 +27,9 @@ double toDouble(std::string const &str) {
     if (str.size() == 3 && str[0] == '\'' && str[2] == '\'') {
         return static_cast<double>(str[1]);
     }
+    if (str.size() == 1 && !isdigit(str[0])) {
+        return static_cast<double>(str[0]);
+    }
     std::string temp = str;
     if (!temp.empty() && temp[temp.size() -1] == 'f') {
         temp = temp.substr(0, temp.size() - 1);
@@ -34,7 +37,7 @@ double toDouble(std::string const &str) {
     try {
         return std::strtod(temp.c_str(), 0);
     } catch (...) {
-        std::cerr << "Invalid input: " << temp << std::endl;
+        std::cerr << "Invalid input: " << str << std::endl;
         return std::numeric_limits<double>::quiet_NaN();  // Fallback
     }
 }
