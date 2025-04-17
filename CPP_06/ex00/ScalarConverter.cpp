@@ -34,12 +34,17 @@ double toDouble(std::string const &str) {
     if (!temp.empty() && temp[temp.size() -1] == 'f') {
         temp = temp.substr(0, temp.size() - 1);
     }
-    try {
-        return std::strtod(temp.c_str(), 0);
-    } catch (...) {
+
+    char *endPtr = NULL;
+    double result = std::strtod(temp.c_str(), &endPtr);
+
+    // Check if the entire string was parsed
+    if (endPtr == temp.c_str() || *endPtr != '\0') {
         std::cerr << "Invalid input: " << str << std::endl;
-        return std::numeric_limits<double>::quiet_NaN();  // Fallback
+        return std::numeric_limits<double>::quiet_NaN();  // Fallback for invalid input
     }
+
+    return result;
 }
 
 void printChar(double value) {
@@ -74,7 +79,10 @@ void printFloat(double value) {
             std::cout << "-inff";
         }
     } else {
-        std::cout << std::fixed << std::setprecision(1);
+        if (value == static_cast<int>(value))
+            std::cout << std::fixed << std::setprecision(1);
+        else
+            std::cout << std::fixed << std::setprecision(7);
         std::cout << static_cast<float>(value) << "f";
     }
     std::cout << std::endl;
@@ -92,7 +100,10 @@ void printDouble(double value) {
             std::cout << "-inf";
         }
     } else {
-        std::cout << std::fixed << std::setprecision(1);
+        if (value == static_cast<int>(value))
+            std::cout << std::fixed << std::setprecision(1);
+        else
+            std::cout << std::fixed << std::setprecision(15);
         std::cout << value;
     }
     std::cout << std::endl;
