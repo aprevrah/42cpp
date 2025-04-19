@@ -58,6 +58,8 @@ int main(int, char**)
     strs[0] = "Zero";
     strs[1] = "One";
     std::cout << strs[0] << strs[1] << std::endl;
-    
+
+    // const Array<int> constArr(1);
+    // std::cout << constArr[0] << std::endl;
     return 0;
 }

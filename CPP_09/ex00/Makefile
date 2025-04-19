@@ -3,13 +3,14 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 NAME := btc
 SRC := main.cpp BitcoinExchange.cpp
 OBJ := $(SRC:.cpp=.o)
+HEADERS := BitcoinExchange.hpp
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-%.c : %.o
+%.o : %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
