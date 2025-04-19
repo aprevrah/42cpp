@@ -10,12 +10,15 @@ class Array
 
     public:
     Array() : _array(NULL), _size(0) {}
+
     Array(unsigned int n) : _array(new T[n]), _size(n) {}
+
     Array(Array const &other) : _array(new T[other._size]), _size(other._size) {
         for (unsigned int i = 0; i < _size; ++i) {
             _array[i] = other._array[i];
         }
     }
+    
     Array &operator=(Array const &rhs) {
         if (this != &rhs) {
             delete[] _array;
