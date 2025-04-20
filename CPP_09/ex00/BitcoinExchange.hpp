@@ -1,13 +1,18 @@
 #pragma once
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <ctime>
 
-class BitcoinExcange {
+class BitcoinExchange {
 	private:
+		std::map<time_t, int> data;
 	public:
-	BitcoinExcange();
-	BitcoinExcange(BitcoinExcange const &other);
-	BitcoinExcange operator=(BitcoinExcange const &rhs);
-	~BitcoinExcange();
+	BitcoinExchange();
+	BitcoinExchange(BitcoinExchange const &other);
+	BitcoinExchange operator=(BitcoinExchange const &rhs);
+	~BitcoinExchange();
 	
-	void doTheThing(std::string data, std::string input) const;
+	void openFile(std::string data, std::string input) const;
 };
