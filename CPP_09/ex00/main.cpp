@@ -5,8 +5,17 @@
 #include <ctime>
 #include <sstream>
 
+bool checkDate(const std::string &date) {
+	if (BitcoinExchange::isValidDate(date)) {
+		std::cout << date << " is VALID" << std::endl;
+		return true;
+	}
+	std::cout << date << " is BAD" << std::endl;
+		return false;
+}
+
 int main(int argc, char **argv) {
-	BitcoinExchange ex;
+	
 	if (argc != 2) {
 		std::cerr << "Usage: " << argv[0] << " <input.txt>" << std::endl;
 	}
@@ -17,37 +26,24 @@ int main(int argc, char **argv) {
 	}
 	std::ifstream dataFile("data.csv");
 	if (!dataFile.is_open()) {
-		std::cerr << "Error: Could not open data\n";
+		std::cerr << "Error: Could not open data file\n";
 		return 1;
 	}
 	
-	// std::string line;
-	// while (getline(dataFile, line)) {
-		
-	// 	std::cout << line << std::endl;
-	// }
-
-	std::map<std::string, double> dataMap; // Map to store date and value
-    std::string line;
-
-    while (getline(dataFile, line)) {
-        std::istringstream ss(line);
-        std::string date;
-        double value;
-
-        if (getline(ss, date, ',') && ss >> value) {
-            dataMap[date] = value; // Insert into the map
-        } else {
-            std::cerr << "Error: Malformed line in data file: " << line << std::endl;
-        }
-    }
-
+	BitcoinExchange ex;
+	ex.loadDataMap(dataFile);
+	ex.printResults(inputFile);
     // Example: Print the map contents
-    for (std::map<std::string, double>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
-        std::cout << it->first << ": " << it->second << std::endl;
-    }
+    // for (std::map<std::string, double>::iterator it = dataMap.begin(); it != dataMap.end(); ++it) {
+    //     std::cout << it->first << ": " << it->second << std::endl;
+    // }
+	
+	// test
+	// checkDate("2025-2-31");
+	// checkDate("2025-2-10");
 
+	// checkDate("2024-2-29");
+	// checkDate("2025-2-29");
+	
     return 0;
-	//std::cout << __FUNCTION__ << std::endl;
 }
-
