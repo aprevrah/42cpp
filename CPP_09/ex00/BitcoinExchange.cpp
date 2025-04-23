@@ -20,6 +20,16 @@ BitcoinExchange::~BitcoinExchange() {}
 
 bool BitcoinExchange::isValidDate(const std::string& date) {
     std::tm tm = {};
+    strptime(date.c_str(), "%Y-%m-%d", &tm);
+    time_t epoch_time = mktime(&tm);
+    std::tm* tm_ptr = std::localtime(&epoch_time);
+    char buffer[11];
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", tm_ptr);
+    return (std::string(buffer) == date);
+}
+
+/* bool BitcoinExchange::isValidDate(const std::string& date) {
+    std::tm tm = {};
     char* result = strptime(date.c_str(), "%Y-%m-%d", &tm);
 
     // strptime returns a null pointer if the parsing fails
@@ -28,9 +38,9 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
     }
 
     // Additional check: Ensure the entire string was consumed
-    if (*result != '\0') {
-        return false;
-    }
+    // if (*result != '\0') {
+    //     return false;
+    // }
 
    // Extract year, month, and day
    int year = tm.tm_year + 1900;
@@ -58,7 +68,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
    }
 
    return true;
-}
+} */
 
 void BitcoinExchange::loadDataMap(std::ifstream& dataFstream) {
 	dataMap.clear();
@@ -77,6 +87,7 @@ void BitcoinExchange::loadDataMap(std::ifstream& dataFstream) {
     }
 }
 
+/* 
 void BitcoinExchange::printResults(std::ifstream &inputFile)
 {
 	std::string line;
@@ -96,6 +107,10 @@ void BitcoinExchange::printResults(std::ifstream &inputFile)
 				std::cerr << "Error: too large a number." << std::endl;
 				continue;
 			}
+            if (dataMap.begin()->first > date) {
+                std::cerr << "Error: date is before database." << std::endl;
+                continue;
+            }
 
 			for (std::map<std::string, double>::reverse_iterator it = dataMap.rbegin(); it != dataMap.rend(); ++it) {
 				if (it->first <= date) {
@@ -112,5 +127,37 @@ void BitcoinExchange::printResults(std::ifstream &inputFile)
 			continue;
 		}
 		DEBUG_PRINT("---");
+	}
+}
+ */
+
+void BitcoinExchange::printResults(std::ifstream &inputFile)
+{
+	std::string line;
+	while (getline(inputFile, line)) {
+		std::istringstream ss(line);
+        std::string date;
+        double value;
+        if (getline(ss, date, '|') && ss >> value) {
+			if (value < 0) {
+				std::cerr << "Error: not a positive number." << std::endl;
+				continue;
+			}
+			if (value > 1000) {
+				std::cerr << "Error: too large a number." << std::endl;
+				continue;
+			}
+            if (dataMap.begin()->first > date) {
+                std::cerr << "Error: date is before database." << std::endl;
+                continue;
+            }
+            std::map<std::string, double>::iterator it = dataMap.upper_bound(date);
+            it--;
+            std::cout << date << " => " << value << " = " << it->second * value << std::endl;
+		}
+		else {
+		    std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
 	}
 }

@@ -16,6 +16,8 @@ bool checkDate(const std::string &date) {
 
 int main(int argc, char **argv) {
 	
+	checkDate("2024-02-29");
+
 	if (argc != 2) {
 		std::cerr << "Usage: " << argv[0] << " <input.txt>" << std::endl;
 	}
