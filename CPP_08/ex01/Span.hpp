@@ -1,7 +1,5 @@
 #pragma once
-#include <algorithm>
-#include <iterator>
-#include <exception>
+#include <ostream>
 #include <set>
 
 class Span {
@@ -11,14 +9,15 @@ class Span {
     public:
         Span();
         Span(unsigned int N);
-        Span(Span &other);
+        Span(Span const &other);
         Span &operator=(Span const &rhs);
         ~Span();
 
-        std::multiset<int> getMultiset();
+        const std::multiset<int>& getMultiset() const;
         void addNumber(int number);
         void addNumbers(std::set<int>::const_iterator begin, std::set<int>::const_iterator end);
         unsigned int shortestSpan() const;
         unsigned int longestSpan() const;
-        friend std::ostream &operator<<(std::ostream &os, Span const &span);
 };
+
+std::ostream &operator<<(std::ostream &os, Span const &span);

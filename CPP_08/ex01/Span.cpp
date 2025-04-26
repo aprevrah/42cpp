@@ -2,24 +2,32 @@
 #include <limits>
 #include <stdexcept>
 #include <iostream>
+#include <algorithm>
 
 Span::Span() : N_(2) {}
 
 Span::Span(unsigned int N) : N_(N) {}
 
-Span::Span(Span &other) : N_(other.N_), span_(other.span_) {}
+Span::Span(Span const &other) : N_(other.N_) {
+    for (std::multiset<int>::const_iterator it = other.span_.begin(); it != other.span_.end(); ++it) {
+        this->span_.insert(*it);
+    }
+}
 
 Span &Span::operator=(Span const &rhs) {
     if (this != &rhs) {
         this->N_ = rhs.N_;
-        this->span_ = rhs.span_;
+        this->span_.clear();
+        for (std::multiset<int>::const_iterator it = rhs.span_.begin(); it != rhs.span_.end(); ++it) {
+            this->span_.insert(*it);
+        }
     }
-    return *this; 
+    return *this;
 }
 
 Span::~Span() {}
 
-std::multiset<int> Span::getMultiset() {
+std::multiset<int> const &Span::getMultiset() const {
     return this->span_;
 }
 
@@ -45,17 +53,12 @@ unsigned int Span::shortestSpan() const {
     std::multiset<int>::const_iterator it = this->span_.begin();
     std::multiset<int>::const_iterator nextIt = it;
     ++nextIt;
-
     unsigned int minSpan = std::numeric_limits<unsigned int>::max();
-
     while (nextIt != this->span_.end()) {
-        unsigned int diff = static_cast<unsigned int>(*nextIt - *it);
-        if (diff < minSpan)
-            minSpan = diff;
+        minSpan = std::min(minSpan, static_cast<unsigned int>(std::max(*nextIt, *it) - std::min(*nextIt, *it)));
         ++it;
         ++nextIt;
     }
-
     return minSpan;
 }
 
@@ -68,8 +71,8 @@ unsigned int Span::longestSpan() const {
 
 std::ostream &operator<<(std::ostream &os, Span const &span) {
     os << "{ ";
-    for (std::multiset<int>::const_iterator it = span.span_.begin(); 
-         it != span.span_.end(); ++it) {
+    for (std::multiset<int>::const_iterator it = span.getMultiset().begin(); 
+         it != span.getMultiset().end(); ++it) {
         os << *it << " ";
     }
     os << "}";

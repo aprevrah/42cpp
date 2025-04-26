@@ -1,9 +1,9 @@
 #include "Span.hpp"
-#include <iostream>
-#include <algorithm>
+#include <stdexcept>
 #include <set>
-#include <cstdlib>  // For rand()
-#include <ctime>    // For seeding random numbers
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 void testSpan() {
     std::cout << "===== Basic Tests =====" << std::endl;
@@ -15,6 +15,8 @@ void testSpan() {
         sp.addNumber(17);
         sp.addNumber(9);
         sp.addNumber(11);
+        //sp.addNumber(2147483647);
+        //sp.addNumber(-2147483648);
 
         std::cout << sp << std::endl;
         std::cout << "Shortest Span: " << sp.shortestSpan() << std::endl; // Should be 2 (9 and 11)
@@ -96,6 +98,11 @@ void testSpan() {
         Span sp3(3);
         sp3 = sp1; // Assignment operator test
 
+        sp1.addNumber(1); //These are deep copies
+        sp2.addNumber(2);
+        sp3.addNumber(3);
+
+        std::cout << "Original: " << sp1 << std::endl;
         std::cout << "Copy Constructor: " << sp2 << std::endl;
         std::cout << "Assignment Operator: " << sp3 << std::endl;
     } catch (const std::exception &e) {
