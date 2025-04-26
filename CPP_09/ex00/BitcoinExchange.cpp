@@ -18,6 +18,15 @@ BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::~BitcoinExchange() {}
 
+std::string trim(std::string const &str) {
+    size_t first = str.find_first_not_of(" \t\n\r");
+    if (first == std::string::npos) {
+        return "";
+    }
+    size_t last = str.find_last_not_of(" \t\n\r");
+    return str.substr(first, last - first + 1);
+}
+
 bool BitcoinExchange::isValidDate(const std::string& date) {
     std::tm tm = {};
     strptime(date.c_str(), "%Y-%m-%d", &tm);
@@ -73,16 +82,29 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
 void BitcoinExchange::loadDataMap(std::ifstream& dataFstream) {
 	dataMap.clear();
     std::string line;
-
+    unsigned int l_nbr = 0;
     while (getline(dataFstream, line)) {
+        l_nbr++;
+        if(l_nbr == 1) {
+            if (line == "date,exchange_rate")
+                continue;
+            else
+                std::cerr << "Error: Bad header in data file" << std::endl;
+        }
+        
         std::istringstream ss(line);
         std::string date;
         double value;
-
         if (getline(ss, date, ',') && ss >> value) {
+            
+            date = trim(date);
+            if (!isValidDate(date)) {
+				std::cerr << "Error: bad date in line" << l_nbr << " of data file: " << line << std::endl;
+				continue;
+			}
             this->dataMap[date] = value; // Insert into the map
         } else {
-            std::cerr << "Error: Malformed line in data file: " << line << std::endl;
+            std::cerr << "Error: line " << l_nbr <<  " of data file: " << line << std::endl;
         }
     }
 }
@@ -131,14 +153,28 @@ void BitcoinExchange::printResults(std::ifstream &inputFile)
 }
  */
 
+
 void BitcoinExchange::printResults(std::ifstream &inputFile)
 {
 	std::string line;
+    unsigned int l_nbr = 0;
 	while (getline(inputFile, line)) {
+        l_nbr++;
+        if(l_nbr == 1) {
+            if (line == "date | value")
+                continue;
+            else
+                std::cerr << "Error: Bad header in input file" << std::endl;
+        } 
 		std::istringstream ss(line);
         std::string date;
         double value;
         if (getline(ss, date, '|') && ss >> value) {
+            date = trim(date);
+            if (!isValidDate(date)) {
+				std::cerr << "Error: bad date => " << line << std::endl;
+				continue;
+			}
 			if (value < 0) {
 				std::cerr << "Error: not a positive number." << std::endl;
 				continue;
