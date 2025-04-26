@@ -25,8 +25,8 @@ int main() {
 
     try {
         std::string str = "Hello, world!";
-        std::string::iterator it = easyfind(str, 'w');
-        std::cout << "Element found: " << *it << std::endl;
+        std::string::iterator it = easyfind(str, 'e');
+        std::cout << "Element found: " << *it << " at: " << std::distance(str.begin(), it) << std::endl;
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }

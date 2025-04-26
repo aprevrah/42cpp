@@ -16,11 +16,9 @@ class MutantStack : public std::stack<T> {
         typedef typename std::stack<T>::container_type::iterator iterator;
         iterator begin();
         iterator end();
-        // typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
-        // reverse_iterator rbegin();
-        // reverse_iterator rend();
-
-        //friend std::ostream &operator<<(std::ostream &os, MutantStack const &span);
+        typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+        reverse_iterator rbegin();
+        reverse_iterator rend();
 };
 
 #include "MutantStack.tpp"

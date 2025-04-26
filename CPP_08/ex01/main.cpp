@@ -15,8 +15,18 @@ void testSpan() {
         sp.addNumber(17);
         sp.addNumber(9);
         sp.addNumber(11);
-        //sp.addNumber(2147483647);
-        //sp.addNumber(-2147483648);
+
+        std::cout << sp << std::endl;
+        std::cout << "Shortest Span: " << sp.shortestSpan() << std::endl; // Should be 2 (9 and 11)
+        std::cout << "Longest Span: " << sp.longestSpan() << std::endl;  // Should be 14 (3 and 17)
+    } catch (const std::exception &e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+    std::cout << "\n===== Limits Tests =====" << std::endl;
+    try {
+        Span sp(2);
+        sp.addNumber(2147483647);
+        sp.addNumber(-2147483648);
 
         std::cout << sp << std::endl;
         std::cout << "Shortest Span: " << sp.shortestSpan() << std::endl; // Should be 2 (9 and 11)
@@ -55,7 +65,7 @@ void testSpan() {
     std::cout << "\n===== Large Random Test =====" << std::endl;
     try {
         Span bigSpan(10000);
-        std::srand(std::time(0)); // Seed for random values
+        std::srand(std::time(0));
         for (int i = 0; i < 10000; ++i) {
             bigSpan.addNumber(std::rand() % 1000000000);
         }

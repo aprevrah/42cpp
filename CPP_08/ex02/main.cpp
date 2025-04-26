@@ -32,14 +32,14 @@ void testMutantStack() {
     try {
         MutantStack<int> randMStack;
         std::stack<int> randStack;
-        std::srand(std::time(0)); // Seed for random values
+        std::srand(std::time(0));
         for (int i = 0; i < 10; ++i) {
             randMStack.push(std::rand() % 1000000000);
             randStack.push(randMStack.top());
         }
         std::cout << "Top: MS: " << randMStack.top() << " S: " << randStack.top() << std::endl;
         std::cout << "Size: " << randMStack.size() << std::endl;
-        for (MutantStack<int>::iterator it = randMStack.begin(); it != randMStack.end(); ++it) {
+        for (MutantStack<int>::reverse_iterator it = randMStack.rbegin(); it != randMStack.rend(); ++it) {
             std::cout << " " << *it << "=" << randStack.top();
             if (*it != randStack.top()) {
                 std::cerr << "Error: MutantStack and Stack are not the same" << std::endl;
