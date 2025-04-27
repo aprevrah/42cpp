@@ -4,7 +4,7 @@
 #include <map>
 #include <ctime>
 #include <string>
-#include <sstream>
+#include <cstdlib>
 
 BitcoinExchange::BitcoinExchange() {}
 
@@ -79,30 +79,52 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
    return true;
 } */
 
+bool BitcoinExchange::parseLine(const std::string &line, char separator, std::string &date, double &value) {
+    size_t separatorPos = line.find(separator);
+    if (separatorPos == std::string::npos) {
+        std::cerr << "Error: Missing separator in line => " << line << std::endl;
+        return false;
+    }
+
+    date = trim(line.substr(0, separatorPos));
+    std::string valueStr = trim(line.substr(separatorPos + 1));
+
+    //Date
+    if (!isValidDate(date)) {
+        std::cerr << "Error: Invalid date => " << date << std::endl;
+        return false;
+    }
+    //Value
+    char* endPtr = NULL;
+    value = std::strtod(valueStr.c_str(), &endPtr);
+    if (*endPtr != '\0' || valueStr.empty()) {
+        std::cerr << "Error: Invalid value => " << valueStr << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
 void BitcoinExchange::loadDataMap(std::ifstream& dataFstream) {
 	dataMap.clear();
     std::string line;
     unsigned int l_nbr = 0;
+
+    if (getline(dataFstream, line)) {
+        l_nbr++;
+        if (line != "date,exchange_rate") {
+            std::cerr << "Error: Bad header in data.csv" << std::endl;
+            return;
+        }
+    }
+
     while (getline(dataFstream, line)) {
         l_nbr++;
-        if(l_nbr == 1) {
-            if (line == "date,exchange_rate")
-                continue;
-            else
-                std::cerr << "Error: Bad header in data file" << std::endl;
-        }
         
-        std::istringstream ss(line);
         std::string date;
         double value;
-        if (getline(ss, date, ',') && ss >> value) {
-            
-            date = trim(date);
-            if (!isValidDate(date)) {
-				std::cerr << "Error: bad date in line" << l_nbr << " of data file: " << line << std::endl;
-				continue;
-			}
-            this->dataMap[date] = value; // Insert into the map
+        if (parseLine(line, ',', date, value)) {
+            this->dataMap[date] = value;
         } else {
             std::cerr << "Error: line " << l_nbr <<  " of data file: " << line << std::endl;
         }
@@ -154,46 +176,42 @@ void BitcoinExchange::printResults(std::ifstream &inputFile)
  */
 
 
-void BitcoinExchange::printResults(std::ifstream &inputFile)
-{
-	std::string line;
+ void BitcoinExchange::printResults(std::ifstream &inputFile) {
+    std::string line;
     unsigned int l_nbr = 0;
-	while (getline(inputFile, line)) {
+
+    if (getline(inputFile, line)) {
         l_nbr++;
-        if(l_nbr == 1) {
-            if (line == "date | value")
-                continue;
-            else
-                std::cerr << "Error: Bad header in input file" << std::endl;
-        } 
-		std::istringstream ss(line);
+        if (line != "date | value") {
+            std::cerr << "Error: Bad header in input file" << std::endl;
+            return;
+        }
+    }
+
+    while (getline(inputFile, line)) {
+        l_nbr++;
+
         std::string date;
         double value;
-        if (getline(ss, date, '|') && ss >> value) {
-            date = trim(date);
-            if (!isValidDate(date)) {
-				std::cerr << "Error: bad date => " << line << std::endl;
-				continue;
-			}
-			if (value < 0) {
-				std::cerr << "Error: not a positive number." << std::endl;
-				continue;
-			}
-			if (value > 1000) {
-				std::cerr << "Error: too large a number." << std::endl;
-				continue;
-			}
-            if (dataMap.begin()->first > date) {
-                std::cerr << "Error: date is before database." << std::endl;
+        if (parseLine(line, '|', date, value)) {
+            if (value < 0) {
+                std::cerr << "Error: Not a positive number => " << value << std::endl;
                 continue;
             }
+            if (value > 1000) {
+                std::cerr << "Error: Too large a number => " << value << std::endl;
+                continue;
+            }
+            if (dataMap.begin()->first > date) {
+                std::cerr << "Error: Date is before database => " << date << std::endl;
+                continue;
+            }
+
             std::map<std::string, double>::iterator it = dataMap.upper_bound(date);
             it--;
             std::cout << date << " => " << value << " = " << it->second * value << std::endl;
-		}
-		else {
-		    std::cerr << "Error: bad input => " << line << std::endl;
-			continue;
-		}
-	}
+        } else {
+            std::cerr << "Error: Failed to parse line " << l_nbr << " => " << line << std::endl;
+        }
+    }
 }

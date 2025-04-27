@@ -23,6 +23,7 @@ class BitcoinExchange {
 	BitcoinExchange operator=(BitcoinExchange const &rhs);
 	~BitcoinExchange();
 	
+	static bool parseLine(const std::string &line, char separator, std::string &date, double &value);
 	static bool isValidDate(const std::string& date);
 	void loadDataMap(std::ifstream& dataFstream);
 	void printResults(std::ifstream &inputFstream);
