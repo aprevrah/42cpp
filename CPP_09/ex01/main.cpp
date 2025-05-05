@@ -1,42 +1,26 @@
 #include <iostream>
 #include <string>
 #include <stack>
-
-int doOper(char opperator, std::stack<int>& stack) {
-    int f = stack.top(); stack.pop();
-    int s = stack.top(); stack.pop();
-    
-    if (opperator == '+')
-        stack.push(f + s);
-    else if (opperator == '-')
-        stack.push(f - s);
-    else if (opperator == '*')
-        stack.push(f * s);
-    else if (opperator == '/')
-        stack.push(f / s);
-    else
-        return 1;
-    return 0;
-}
+#include <stdexcept>
+#include "RPN.hpp"
 
 int main(int argc, char **argv) {
-    if (argc != 1)
+    if (argc != 2)
         std::cerr << "Expected one arg" << std::endl;
 
-    std::stack<int> stack;
-    std::string expr(argv[1]);
-    for (size_t i = 0; i < expr.length(); i++) {
-        std::cout << expr[i];
-        if (isdigit(expr[i])) {
-            stack.push(expr[i] - '0');
-        }
-        else if (expr[i] == ' ') {
-            continue;
-        }
-        else {
-            doOper(expr[i], stack);
-        }
-        //std::cout << stack.top();
+    std::string expr = argv[1];
+    RPN RPN(expr);
+    int result = 0;
+    try {
+        result = RPN.evaluate();
+        std::cout << "result:" << result << std::endl;
     }
-    std::cout << "result:" << stack.top();
+    catch (const std::invalid_argument &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    catch (const std::exception &e) {
+        std::cerr << "Unexpected error: " << e.what() << std::endl;
+    }
+    
+    return 0;
 }
