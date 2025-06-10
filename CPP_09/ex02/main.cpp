@@ -3,6 +3,31 @@
 #include <ostream>
 #include <vector>
 
+/**
+ * @brief binary search a sorted chunked sequence for the chunk whose last value is smaller than item 
+ * 
+ * @param a the sequence
+ * @param item 
+ * @param low low chunk index
+ * @param high high chunk index
+ * @param chunk_size 
+ * @return int the chunk index 
+ */
+int binarySearch(const std::vector<int> &a, const int item, int low, int high, const size_t chunk_size)
+{
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (item == a[mid * chunk_size + chunk_size - 1])
+            return mid + 1;
+        else if (item > a[mid * chunk_size + chunk_size - 1])
+            low = mid + 1;
+        else 
+            high = mid - 1;
+    }
+
+    return low;
+}
+
 int main(int argc, char** argv) {
     (void) argc;
     (void) argv;
@@ -49,21 +74,13 @@ int main(int argc, char** argv) {
         // FJ Step 3 - binary insert from the pend into sorted
         for (size_t i=0; i * chunk_size < pend.size(); i++) {
             int last_of_pend_elem = pend[(i+1)*chunk_size-1];
-            // search over sorted from corresponding a element to the left.
-            // for every b_i, we definitely need to compare to the
+            // binary search over sorted from corresponding a element to the left.
+            // Why "2+i*2-1"? for every b_i, we definitely need to compare to the
             // first two elements b1, a1, and then one more according
             // to i and one other more because we inserted the previous
             // b_i's (-1 because of 0-index)
-            int j;
-            for (j = 2+i*2-1; j>=0; j--) {
-                int last = sorted[(j+1)*chunk_size-1];
-                if (last < last_of_pend_elem) {
-                    sorted.insert(sorted.begin()+(j+1)*chunk_size, pend.begin()+i*chunk_size, pend.begin()+(i+1)*chunk_size);
-                    break;
-                }
-            }
-            if(j==-1)
-                sorted.insert(sorted.begin(), pend.begin()+i*chunk_size, pend.begin()+(i+1)*chunk_size);
+            int index = binarySearch(sorted, last_of_pend_elem, 0, 2+i*2-1, chunk_size);
+            sorted.insert(sorted.begin() + index * chunk_size, pend.begin()+i*chunk_size, pend.begin()+(i+1)*chunk_size);
         }
         chunk_size /= 2;
     }
