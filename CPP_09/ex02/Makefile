@@ -1,5 +1,5 @@
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -g #-std=c++98 -g
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g
 NAME := PmergeMe
 SRC := main.cpp PmergeMe.cpp
 OBJ := $(SRC:.cpp=.o)
