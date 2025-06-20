@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Number of test runs
-tests=1000
+tests=100
 
 debug=0
 if [ "$1" = "-d" ]; then

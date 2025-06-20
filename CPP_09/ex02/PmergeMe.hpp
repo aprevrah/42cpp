@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <deque>
 #include <algorithm>
@@ -9,7 +10,15 @@ extern unsigned long comparisons; // Make sure this is defined in one .cpp file
 template<typename T>
 class PmergeMe {
 public:
-    PmergeMe(const T& data) : data_(data) {}
+    PmergeMe() {};
+    PmergeMe(const T& data) : data_(data) {};
+    PmergeMe(const PmergeMe& other) : data_(other.data_) {}
+    PmergeMe& operator=(const PmergeMe& other) {
+        if (this != &other)
+            data_ = other.data_;
+        return *this;
+    }
+    ~PmergeMe() {};
     T FJsort() const;
 
 private:
@@ -32,9 +41,6 @@ int PmergeMe<T>::binarySearch(const T &a, const int item, int low, int high, con
 {
     while (low <= high) {
         int mid = low + (high - low) / 2;
-        // comparisons++; // count comparison
-        // if (item == a[mid * chunk_size + chunk_size - 1])
-        //     return mid + 1;
         comparisons++; // count comparison
         if (item >= a[mid * chunk_size + chunk_size - 1])
             low = mid + 1;
@@ -50,12 +56,12 @@ T PmergeMe<T>::FJsort() const
     T sorted(data_);
     // Step 1 of the FJ Algorithm:
     // Data are chunked up in sizes that double from iteration to iteration.
-    // We glide along the array with a chunk a and a chunk b
+    // We iterate along the array with a chunk a and a chunk b
     // We compare the last elements of chunks a and b. If last(a) is bigger than
     // last(b), we swap the chunks. For that we need a buffer. 
     size_t chunk_size = 1;
     while (sorted.size() < 4 ? chunk_size <= sorted.size()/2 : chunk_size < sorted.size()/2) {
-        std::vector<int> buffer(chunk_size); // in case we need to swap 
+        std::vector<int> buffer(chunk_size); // in case we need to swap
         for (size_t offs=0; offs + 2 * chunk_size <= sorted.size(); offs+= chunk_size * 2) {
             int last_of_chunk_a = sorted[offs + chunk_size - 1];
             int last_of_chunk_b = sorted[offs + 2 * chunk_size -1];
